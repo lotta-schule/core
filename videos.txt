@@ -1,0 +1,2 @@
+Password for user lotta: 
+psql: fe_sendauth: no password supplied
