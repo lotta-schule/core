@@ -53,7 +53,7 @@ defmodule Lotta.TenantsTest do
                  tenant: %{title: "Chile Lotta", slug: "chile"}
                )
 
-      assert :ok = Tenants.delete_tenant(tenant)
+      assert {:ok, _tenant} = Tenants.delete_tenant(tenant)
 
       assert_raise Postgrex.Error, fn ->
         Lotta.Repo.all(Lotta.Accounts.User, prefix: tenant.prefix)
