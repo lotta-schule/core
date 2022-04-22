@@ -8,7 +8,6 @@ defmodule Lotta.Accounts.UserGroup do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Ecto.Changeset
   alias Lotta.Accounts.{User, UserGroup}
 
   @type id() :: pos_integer()
