@@ -11,7 +11,7 @@ defmodule Lotta.Accounts.PermissionsTest do
   @prefix "tenant_test"
 
   setup do
-    # TODO: And this is a big TODO!
+    # And this is a big TODO!
     # I did not know better when I wrote this, but the import from
     # LottaWeb really is not a good idea. I think we should find another
     # way around caching these values, one that belongs into the same context

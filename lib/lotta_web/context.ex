@@ -46,8 +46,7 @@ defmodule LottaWeb.Context do
   """
   @spec set_virtual_user_fields(User.t()) :: User.t()
   def set_virtual_user_fields(%User{} = user) do
-    groups =
-      all_user_groups(user)
+    groups = all_user_groups(user)
 
     user
     |> Map.put(:all_groups, groups)

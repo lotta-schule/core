@@ -19,7 +19,7 @@ defmodule Lotta.Accounts.Permissions do
   @spec is_author?(User.t(), Article.t() | Directory.t() | File.t() | Message.t()) :: boolean
 
   def is_author?(%User{} = user, %Article{} = article) do
-    # TODO: Execute one query to check if the user is the author of the article
+    # Execute one query to check if the user is the author of the article
     #      and return true or false instead of fetching all the article's users
     article
     |> Repo.preload(:users)
