@@ -56,7 +56,8 @@ defmodule Lotta.Accounts.Permissions do
            |> Repo.preload(:groups)
            |> Map.get(:groups, [])
 
-         Enum.empty?(groups) || user_is_in_groups_list?(user, groups)
+         (not is_nil(user) and user.is_admin?) or
+           (article.published and (Enum.empty?(groups) or user_is_in_groups_list?(user, groups)))
        end).()
   end
 

@@ -34,7 +34,6 @@ defmodule LottaWeb.TenantPlugTest do
     } do
       # Mock the behavior of the host header
       conn = put_req_header(conn, "x-forwarded-host", "test.lotta.schule:3123")
-      Application.put_env(:lotta, :base_uri, host: "lotta.schule")
 
       conn = TenantPlug.call(conn, %{})
 
