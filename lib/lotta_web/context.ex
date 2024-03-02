@@ -46,13 +46,8 @@ defmodule LottaWeb.Context do
   """
   @spec set_virtual_user_fields(User.t()) :: User.t()
   def set_virtual_user_fields(%User{} = user) do
-    user =
-      user
-      |> Repo.preload([:groups])
-
     groups =
-      user
-      |> all_user_groups()
+      all_user_groups(user)
 
     user
     |> Map.put(:all_groups, groups)
@@ -64,7 +59,11 @@ defmodule LottaWeb.Context do
   """
   @spec set_virtual_tenant_fields(Tenant.t()) :: Tenant.t()
   def set_virtual_tenant_fields(%Tenant{} = tenant) do
-    Map.put(tenant, :configuration, Tenants.get_configuration(tenant))
+    Map.put(
+      tenant,
+      :configuration,
+      Tenants.get_configuration(tenant)
+    )
   end
 
   @impl true
@@ -110,9 +109,18 @@ defmodule LottaWeb.Context do
 
   defp maybe_put_tenant(context, _conn), do: context
 
-  defp get_dynamic_groups(%User{enrollment_tokens: enrollment_tokens}),
-    do: Accounts.list_groups_for_enrollment_tokens(enrollment_tokens)
+  defp get_dynamic_groups(%User{} = user) do
+    Accounts.list_groups_for_enrollment_tokens(user.enrollment_tokens,
+      prefix: Ecto.get_meta(user, :prefix)
+    )
+  end
 
-  defp all_user_groups(%User{groups: assigned_groups} = user),
-    do: assigned_groups ++ get_dynamic_groups(user)
+  defp all_user_groups(%User{} = user) do
+    assigned_groups =
+      user
+      |> Repo.preload(:groups)
+      |> Map.get(:groups, [])
+
+    assigned_groups ++ get_dynamic_groups(user)
+  end
 end

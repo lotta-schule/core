@@ -198,16 +198,14 @@ defmodule Lotta.Accounts do
   If no tenant is passed to the function, the current
   process' tenant will be taken.
   """
-  @spec list_groups_for_enrollment_tokens([String.t()], Tenant.t() | nil) :: [
+  @spec list_groups_for_enrollment_tokens([String.t()], Keyword.t() | nil) :: [
           UserGroup.t()
         ]
-  def list_groups_for_enrollment_tokens(tokens, tenant \\ nil) when is_list(tokens) do
-    prefix = if tenant, do: tenant.prefix, else: Repo.get_prefix()
-
+  def list_groups_for_enrollment_tokens(tokens, options \\ []) when is_list(tokens) do
     from(g in UserGroup,
       where: fragment("? && ?", g.enrollment_tokens, ^tokens)
     )
-    |> Repo.all(prefix: prefix)
+    |> Repo.all(options)
   end
 
   @doc """

@@ -991,7 +991,7 @@ defmodule LottaWeb.UserResolverTest do
 
       user_groups =
         user.enrollment_tokens
-        |> Accounts.list_groups_for_enrollment_tokens(t)
+        |> Accounts.list_groups_for_enrollment_tokens(t.prefix)
 
       [%{name: group_name}] = user_groups
       assert group_name == "Lehrer"

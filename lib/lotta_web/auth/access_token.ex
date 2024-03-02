@@ -64,7 +64,7 @@ defmodule LottaWeb.Auth.AccessToken do
     all_groups =
       user.groups ++
         (user.enrollment_tokens
-         |> Accounts.list_groups_for_enrollment_tokens(tenant))
+         |> Accounts.list_groups_for_enrollment_tokens(prefix: tenant.prefix))
 
     is_admin =
       all_groups
