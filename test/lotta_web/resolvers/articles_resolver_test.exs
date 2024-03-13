@@ -2777,8 +2777,8 @@ defmodule LottaWeb.ArticleResolverTest do
 
   describe "tags query" do
     @query """
-    query tag($tag: String!) {
-      tag(tag: $tag) {
+    query articlesByTag($tag: String!) {
+      articles: articlesByTag(tag: $tag) {
         title
         preview
         tags
@@ -2798,7 +2798,7 @@ defmodule LottaWeb.ArticleResolverTest do
 
       assert res == %{
                "data" => %{
-                 "tag" => [
+                 "articles" => [
                    %{
                      "isPinnedToTop" => false,
                      "preview" =>
@@ -2830,7 +2830,7 @@ defmodule LottaWeb.ArticleResolverTest do
 
       assert res == %{
                "data" => %{
-                 "tag" => [
+                 "articles" => [
                    %{
                      "isPinnedToTop" => false,
                      "preview" =>
@@ -2854,7 +2854,7 @@ defmodule LottaWeb.ArticleResolverTest do
 
       assert res == %{
                "data" => %{
-                 "tag" => []
+                 "articles" => []
                }
              }
     end
