@@ -1,5 +1,12 @@
 # Lotta
 
+> [!WARNING]
+> This is the former repository of the Core API for [lotta](https://lotta.schule).
+> The project hast been moved to the [lotta monorepo](https://github.com/lotta-schule/lotta),
+> and will be developped there to ease the development and integration of
+> Lotta.
+> Please see there for Updates and current development.
+
 [Lotta](https://lotta.schule) API Server
 
 Phoenix, Elixir & Absinthe
